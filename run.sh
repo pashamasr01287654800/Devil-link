@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# Get script directory
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+cd "$SCRIPT_DIR" || exit 1
+
 cleanup() {
     echo "Exiting... killing background processes."
-    # kill php and ssh started by this script
     pkill -P $$
-    # make sure port 8080 is free
     fuser -k 8080/tcp >/dev/null 2>&1
     exit 0
 }
