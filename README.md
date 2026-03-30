@@ -33,6 +33,7 @@ Devil-link is a phishing and information-stealing tool that creates a fake video
 2. Run the server with:  
    ```bash
    bash run.sh
+```
 
 1. Enter the port number you want to use (e.g., 8080).
    · If the port is busy, the script will ask if you want to close the existing service.
@@ -54,10 +55,10 @@ Devil-link is a phishing and information-stealing tool that creates a fake video
    · sensitiveinfo.txt (device and location info)
    · cam<date>.png (webcam snapshots)
 
-
-
 Disclaimer
 
 This project is for educational and research purposes only.
 The author is not responsible for any misuse of this tool.
 Use it only in controlled environments with explicit permission.
+
+```
