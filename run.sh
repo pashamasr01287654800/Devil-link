@@ -20,6 +20,24 @@ trap cleanup SIGINT SIGTERM EXIT
 while true; do
     read -p "Enter port number: " PORT
     
+    # Check if input is empty
+    if [ -z "$PORT" ]; then
+        echo "Error: Port number cannot be empty. Please enter a valid port number."
+        continue
+    fi
+    
+    # Check if port is a valid number
+    if ! [[ "$PORT" =~ ^[0-9]+$ ]]; then
+        echo "Error: Port number must contain only digits. Please enter a valid port number."
+        continue
+    fi
+    
+    # Check if port is in valid range (1-65535)
+    if [ "$PORT" -lt 1 ] || [ "$PORT" -gt 65535 ]; then
+        echo "Error: Port number must be between 1 and 65535. Please enter a valid port number."
+        continue
+    fi
+    
     # Check if port is in use
     if lsof -i :"$PORT" >/dev/null 2>&1; then
         echo "Port $PORT is already in use."
@@ -71,4 +89,11 @@ while true; do
         echo "Invalid number. Please enter 1 or 2."
     fi
 done
+
+
+
+
+
+
+
 
