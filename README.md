@@ -34,14 +34,6 @@ Devil-link is a phishing and information-stealing tool that creates a fake video
    ```bash
    bash run.sh
 ```
-
-1. Enter the port number when prompted (required, cannot be empty):
-   · Must be a valid number between 1-65535
-   · If the port is busy, the script will ask if you want to close the existing service
-2. Choose a mode:
-   · [1] Local Test → Access only on localhost (http://localhost:PORT)
-   · [2] Cloudflare Tunnel → Public access with Cloudflare random URL
-3. If you choose Cloudflare, make sure cloudflared is installed:
    ```bash
    # On macOS
    brew install cloudflared
