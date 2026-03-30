@@ -1,5 +1,9 @@
 # Devil-link
 
+<p align="center">
+  <img src="Devil-link.png" alt="Devil-link" width="200">
+</p>
+
 Devil-link is a phishing and information-stealing tool that creates a fake video chat website to trick victims into sharing sensitive device data, location, and webcam access.  
 
 ## Features
@@ -40,14 +44,6 @@ Devil-link is a phishing and information-stealing tool that creates a fake video
 This project is for educational and research purposes only.
 The author is not responsible for any misuse of this tool.
 Use it only in controlled environments with explicit permission.
-
-
-
-
-
-
-
-
 
 
 
