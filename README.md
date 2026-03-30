@@ -1,6 +1,3 @@
-Here's the updated README with the modifications inside a code block for easy copying:
-
-```markdown
 # Devil-link
 
 Devil-link is a phishing and information-stealing tool that creates a fake video chat website to trick victims into sharing sensitive device data, location, and webcam access.  
@@ -64,6 +61,9 @@ Disclaimer
 This project is for educational and research purposes only.
 The author is not responsible for any misuse of this tool.
 Use it only in controlled environments with explicit permission.
+
+
+
 
 
 
