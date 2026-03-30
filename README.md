@@ -18,9 +18,9 @@ Devil-link is a phishing and information-stealing tool that creates a fake video
   - `post.php`: Captures and stores webcam images from the victim’s camera.  
 
 - **Server Runner**  
-  - `run.sh`: Launches a PHP server on port 8080 and tunnels it online via:  
-    - serveo.net  
-    - localhost.run  
+  - `run.sh`: Launches a PHP server on a user-specified port and offers two modes:
+    - Local Test: Accessible only on localhost for testing
+    - Cloudflare Tunnel: Public access via Cloudflare's random URL (e.g., https://random-name.trycloudflare.com)
 
 ## Files
 - `index.html` → Main phishing page.  
@@ -34,17 +34,25 @@ Devil-link is a phishing and information-stealing tool that creates a fake video
    ```bash
    bash run.sh
 
-3. Choose a tunneling option (Serveo or Localhost.run).
-
-
-4. Share the generated link with the target.
-
-
+1. Enter the port number you want to use (e.g., 8080).
+   · If the port is busy, the script will ask if you want to close the existing service.
+2. Choose a mode:
+   · [1] Local Test → Access only on localhost (http://localhost:PORT)
+   · [2] Cloudflare Tunnel → Public access with Cloudflare random URL
+3. If you choose Cloudflare, make sure cloudflared is installed:
+   ```bash
+   # On macOS
+   brew install cloudflared
+   
+   # On Linux
+   wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+   chmod +x cloudflared-linux-amd64
+   sudo mv cloudflared-linux-amd64 /usr/local/bin/cloudflared
+   ```
+4. Share the generated link with the target (Cloudflare mode only).
 5. Collected data will be saved in:
-
-sensitiveinfo.txt (device and location info).
-
-cam<date>.png (webcam snapshots).
+   · sensitiveinfo.txt (device and location info)
+   · cam<date>.png (webcam snapshots)
 
 
 
