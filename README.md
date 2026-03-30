@@ -33,20 +33,7 @@ Devil-link is a phishing and information-stealing tool that creates a fake video
 2. Run the server with:  
    ```bash
    bash run.sh
-```
-   ```bash
-   # On macOS
-   brew install cloudflared
-   
-   # On Linux
-   wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
-   chmod +x cloudflared-linux-amd64
-   sudo mv cloudflared-linux-amd64 /usr/local/bin/cloudflared
    ```
-4. Share the generated link with the target (Cloudflare mode only)
-5. Collected data will be saved in:
-   · sensitiveinfo.txt (device and location info)
-   · cam<date>.png (webcam snapshots)
 
 Disclaimer
 
