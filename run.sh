@@ -7,28 +7,68 @@ cd "$SCRIPT_DIR" || exit 1
 cleanup() {
     echo "Exiting... killing background processes."
     pkill -P $$
-    fuser -k 8080/tcp >/dev/null 2>&1
+    if [ -n "$PORT" ]; then
+        fuser -k "$PORT"/tcp >/dev/null 2>&1
+    fi
+    pkill -f cloudflared >/dev/null 2>&1
     exit 0
 }
 
 trap cleanup SIGINT SIGTERM EXIT
 
+# Get port from user and check if it's in use
 while true; do
-    echo "[1] serveo.net"
-    echo "[2] localhost.run"
+    read -p "Enter port number: " PORT
+    
+    # Check if port is in use
+    if lsof -i :"$PORT" >/dev/null 2>&1; then
+        echo "Port $PORT is already in use."
+        while true; do
+            read -p "Do you want to close it and use this port? (yes/no): " close_choice
+            if [ "$close_choice" == "yes" ]; then
+                fuser -k "$PORT"/tcp >/dev/null 2>&1
+                echo "Port $PORT is now free."
+                break
+            elif [ "$close_choice" == "no" ]; then
+                break 2
+            else
+                echo "Please answer yes or no."
+            fi
+        done
+    else
+        echo "Port $PORT is available."
+        break
+    fi
+done
+
+# Start PHP server
+echo "Starting PHP server on port $PORT..."
+php -S 0.0.0.0:"$PORT" >/dev/null 2>&1 &
+
+while true; do
+    echo "[1] Local Test (Localhost only)"
+    echo "[2] Cloudflare Tunnel (Public)"
     read -p "Enter number: " num
 
     if [ "$num" == "1" ]; then
-        fuser -k 8080/tcp >/dev/null 2>&1
-        php -S 0.0.0.0:8080 >/dev/null 2>&1 &
-        ssh -R 80:0.0.0.0:8080 serveo.net
+        echo "Local test mode - Access at: http://localhost:$PORT"
+        echo "Press Ctrl+C to exit"
+        while true; do
+            sleep 1
+        done
         break
     elif [ "$num" == "2" ]; then
-        fuser -k 8080/tcp >/dev/null 2>&1
-        php -S 0.0.0.0:8080 >/dev/null 2>&1 &
-        ssh -R 80:localhost:8080 nokey@localhost.run
+        # Check if cloudflared is installed
+        if ! command -v cloudflared &> /dev/null; then
+            echo "cloudflared is not installed. Please install it first."
+            echo "Visit: https://github.com/cloudflare/cloudflared"
+            cleanup
+            exit 1
+        fi
+        cloudflared tunnel --url http://localhost:"$PORT"
         break
     else
         echo "Invalid number. Please enter 1 or 2."
     fi
 done
+
