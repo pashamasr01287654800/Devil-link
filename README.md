@@ -60,5 +60,3 @@ Disclaimer
 This project is for educational and research purposes only.
 The author is not responsible for any misuse of this tool.
 Use it only in controlled environments with explicit permission.
-
-```
